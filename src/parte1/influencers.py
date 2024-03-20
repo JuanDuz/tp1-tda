@@ -45,14 +45,17 @@ def branch_and_bound(influencers, mayor_penetracion_de_mercado, mejor_combinacio
     penetracion_actual = sum(influ.penetracion for influ in combinacion_actual)
     penetracion_actual_ampliada = penetracion_actual + influencer.penetracion
 
+    if penetracion_actual > mayor_penetracion_de_mercado:
+        mayor_penetracion_de_mercado = penetracion_actual
+        mejor_combinacion[:] = combinacion_actual[:]
+        print("Nuevo mejor valor", mayor_penetracion_de_mercado, "del nodo ->", print_nodo(mejor_combinacion))
+    if penetracion_actual_ampliada > mayor_penetracion_de_mercado and influencer.puede_trabajar_con(
+            combinacion_actual):
+        mayor_penetracion_de_mercado = penetracion_actual_ampliada
+        mejor_combinacion[:] = combinacion_actual_ampliada[:]
+        print("Nuevo mejor valor", mayor_penetracion_de_mercado, "del nodo ->", print_nodo(mejor_combinacion))
     if index == n - 1:
-        if penetracion_actual > mayor_penetracion_de_mercado:
-            mayor_penetracion_de_mercado = penetracion_actual
-            mejor_combinacion[:] = combinacion_actual[:]
-        if penetracion_actual_ampliada > mayor_penetracion_de_mercado and influencer.puede_trabajar_con(
-                combinacion_actual):
-            mayor_penetracion_de_mercado = penetracion_actual_ampliada
-            mejor_combinacion[:] = combinacion_actual_ampliada[:]
+        print("Ya evalue mis 2 nodos descendientes y ambos son hojas, asi que vuelvo")
         return mejor_combinacion, mayor_penetracion_de_mercado
 
     influencer_sig = influencers[index + 1]
@@ -73,6 +76,8 @@ def branch_and_bound(influencers, mayor_penetracion_de_mercado, mejor_combinacio
             branch_and_bound(influencers, mayor_penetracion_de_mercado, mejor_combinacion, combinacion_actual, n,
                              index + 1))
         combinacion_actual.pop()
+        print("\n-------- Altura del arbol:", index, "--------\n")
+        print("Vovli a nodo ->", print_nodo(combinacion_actual))
     else:
         print("Podo nodo desc:", print_nodo(combinacion_actual_ampliada))
 
