@@ -67,6 +67,14 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(valor_esperado, valor_conseguido)
         self.assertEqual(set(influencers_esperados), set(influencers))
 
+    def test_example_informe(self):
+        main("../data/example_informe.csv")
+        valor_conseguido, influencers = leer_resultados("resultado.txt")
+        valor_esperado, influencers_esperados = leer_resultados(
+            "../data/example_informe_result.txt")
+        self.assertEqual(valor_esperado, valor_conseguido)
+        self.assertEqual(set(influencers_esperados), set(influencers))
+
 
 if __name__ == '__main__':
     unittest.main()
