@@ -84,9 +84,9 @@ def main(file):
                                                           best_combination, current_combination, current_market_value,
                                                           n, 0, cost_function)
 
-    print("Valor conseguido:", max_market_value)
+    print("Valor conseguido:", max_market_value, '\n')
     for influencer in best_combination:
-        print(influencer)
+        print(influencer.name)
 
     with open('resultado.txt', 'w') as f:
         f.write(f"Valor conseguido: {max_market_value}\n\n")

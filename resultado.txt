@@ -4,5 +4,3 @@ Pucho
 Tucho
 Suncho
 Fercho
-
-Pasos realizados: 9

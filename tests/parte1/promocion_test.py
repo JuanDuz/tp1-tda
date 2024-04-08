@@ -1,6 +1,6 @@
 import unittest
 
-from src.promocion import main
+from src.parte1.promocion import main
 
 
 def leer_resultados(path):
@@ -14,64 +14,64 @@ def leer_resultados(path):
 class MyTestCase(unittest.TestCase):
 
     def test_caso_example(self):
-        main("../data/example.csv")
+        main("../../data/parte1/example.csv")
         valor_conseguido, influencers = leer_resultados("resultado.txt")
-        valor_esperado, influencers_esperados = leer_resultados("../data/example_result.txt")
+        valor_esperado, influencers_esperados = leer_resultados("../../data/parte1/example_result.txt")
         self.assertEqual(valor_esperado, valor_conseguido)
         self.assertEqual(set(influencers_esperados), set(influencers))
 
     def test_caso_simple(self):
         # Ejemplo de cómo implementar un caso básico, los demás siguen una lógica similar
-        main("../data/simple.csv")
+        main("../../data/parte1/simple.csv")
         valor_conseguido, influencers = leer_resultados("resultado.txt")
-        valor_esperado, influencers_esperados = leer_resultados("../data/simple_result.txt")
+        valor_esperado, influencers_esperados = leer_resultados("../../data/parte1/simple_result.txt")
         self.assertEqual(valor_esperado, valor_conseguido)
         self.assertEqual(set(influencers_esperados), set(influencers))
 
     def test_caso_grande(self):
-        main("../data/large.csv")
+        main("../../data/parte1/large.csv")
         valor_conseguido, influencers = leer_resultados("resultado.txt")
-        valor_esperado, influencers_esperados = leer_resultados("../data/large_result.txt")
+        valor_esperado, influencers_esperados = leer_resultados("../../data/parte1/large_result.txt")
         self.assertEqual(valor_esperado, valor_conseguido)
         self.assertEqual(set(influencers_esperados), set(influencers))
 
     def test_todos_incompatibles(self):
-        main("../data/incompatibles.csv")
+        main("../../data/parte1/incompatibles.csv")
         valor_conseguido, influencers = leer_resultados("resultado.txt")
         valor_esperado, influencers_esperados = leer_resultados(
-            "../data/incompatibles_result.txt")
+            "../../data/parte1/incompatibles_result.txt")
         self.assertEqual(valor_esperado, valor_conseguido)
         self.assertEqual(set(influencers_esperados), set(influencers))
 
     def test_grupos_compatibilidad(self):
-        main("../data/groups.csv")
+        main("../../data/parte1/groups.csv")
         valor_conseguido, influencers = leer_resultados("resultado.txt")
         valor_esperado, influencers_esperados = leer_resultados(
-            "../data/groups_result.txt")
+            "../../data/parte1/groups_result.txt")
         self.assertEqual(valor_esperado, valor_conseguido)
         self.assertEqual(set(influencers_esperados), set(influencers))
 
     def test_extra(self):
-        main("../data/extra_1.csv")
+        main("../../data/parte1/extra_1.csv")
         valor_conseguido, influencers = leer_resultados("resultado.txt")
         valor_esperado, influencers_esperados = leer_resultados(
-            "../data/extra_1_result.txt")
+            "../../data/parte1/extra_1_result.txt")
         self.assertEqual(valor_esperado, valor_conseguido)
         self.assertEqual(set(influencers_esperados), set(influencers))
 
     def test_extra_two(self):
-        main("../data/extra_2.csv")
+        main("../../data/parte1/extra_2.csv")
         valor_conseguido, influencers = leer_resultados("resultado.txt")
         valor_esperado, influencers_esperados = leer_resultados(
-            "../data/extra_2_result.txt")
+            "../../data/parte1/extra_2_result.txt")
         self.assertEqual(valor_esperado, valor_conseguido)
         self.assertEqual(set(influencers_esperados), set(influencers))
 
     def test_example_informe(self):
-        main("../data/example_informe.csv")
+        main("../../data/parte1/example_informe.csv")
         valor_conseguido, influencers = leer_resultados("resultado.txt")
         valor_esperado, influencers_esperados = leer_resultados(
-            "../data/example_informe_result.txt")
+            "../../data/parte1/example_informe_result.txt")
         self.assertEqual(valor_esperado, valor_conseguido)
         self.assertEqual(set(influencers_esperados), set(influencers))
 
