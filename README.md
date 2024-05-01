@@ -36,7 +36,7 @@ python3 tp1/src/parte3/regionalizar.py 8 4 4
 </details>
 <br>
 
-# TP2
+## TP2
 
 <details open>
 <summary>Partes</summary>
