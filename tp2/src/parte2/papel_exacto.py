@@ -20,30 +20,34 @@ def read_data(filepath):
 
 
 def solve_casting_problem(actors):
-    model = pulp.LpProblem("Maximize_Audience_Potential", pulp.LpMaximize)
+    audience_maximization = pulp.LpProblem("Maximize_Audience_Potential", pulp.LpMaximize)
 
     # Variables
     x = {}
     for actor, roles in actors.items():
         for role, potential in roles:
-            x[(actor, role)] = pulp.LpVariable(f'x_{actor}_{role}', cat='Binary')
+            x[(actor, role)] = pulp.LpVariable(f'x_{actor}_{role}', 0, 1)
 
     # Objective Function
-    model += pulp.lpSum(x[(actor, role)] * potential for actor, roles in actors.items() for role, potential in roles)
+    total_objective = 0
+    for actor, roles in actors.items():
+        for role, potential in roles:
+            total_objective += potential * x[(actor, role)]
+    audience_maximization += total_objective
 
     # Constraints
     # Each actor can be assigned to at most one role
     for actor in actors:
-        model += pulp.lpSum(x[(actor, role)] for role, potential in actors[actor]) <= 1, f"One_role_per_actor_{actor}"
+        audience_maximization += pulp.lpSum(x[(actor, role)] for role, potential in actors[actor]) <= 1
 
     # Each role can be filled by at most one actor
     all_roles = set(role for roles in actors.values() for role, _ in roles)
     for role in all_roles:
-        model += pulp.lpSum(x[(actor, r)] for actor, roles in actors.items() for r, p in roles if
-                            r == role) <= 1, f"One_actor_per_role_{role}"
+        audience_maximization += pulp.lpSum(x[(actor, r)] for actor, roles in actors.items() for r, p in roles if
+                            r == role) <= 1
 
     # Solve the problem
-    model.solve()
+    audience_maximization.solve()
 
     # Output results
     total_potential = 0
