@@ -34,9 +34,9 @@ def max_profit(persons, max_capacity, max_weight):
         for j in range(1, max_weight + 1):
             for m in range(1, max_capacity + 1):
                 not_in_opt = opt[i - 1][j][m]
-                in_opt = opt[i - 1][j - persons[i - 1].project_weight][m - 1] + persons[i - 1].project_profit
 
-                if j >= persons[i - 1].project_weight:
+                if j >= persons[i - 1].project_weight and m >= 1:
+                    in_opt = opt[i - 1][j - persons[i - 1].project_weight][m - 1] + persons[i - 1].project_profit
                     if in_opt > not_in_opt:
                         opt[i][j][m] = in_opt
                         selected_persons_indexes[i][j][m] = i
